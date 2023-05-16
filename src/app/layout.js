@@ -1,6 +1,13 @@
+/**
+ * Need to be on client because use of MUI theme here.
+ */
+"use client";
+
 import NavBar from "@/components/Navbar/NavBar";
+import { ThemeProvider, useMediaQuery } from "@mui/material";
 // import "./styles/globals.scss";
 import { Inter } from "next/font/google";
+import { lightTheme, darkTheme } from "./theme";
 
 // import CssBaseline from "@mui/material/CssBaseline";
 
@@ -12,13 +19,18 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+    const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+    const theme = prefersDarkMode ? darkTheme : lightTheme;
+
     return (
-        <html lang="en">
-            {/* <CssBaseline /> */}
-            <body className={inter.className}>
-                <NavBar />
-                {children}
-            </body>
-        </html>
+        <ThemeProvider theme={theme}>
+            <html lang="en">
+                {/* <CssBaseline /> */}
+                <body className={inter.className}>
+                    <NavBar />
+                    {children}
+                </body>
+            </html>
+        </ThemeProvider>
     );
 }
