@@ -1,10 +1,10 @@
 import React from "react";
+import TextEditor from "../../components/editor/TextEditor";
 
 const Editor = () => {
     return (
         <div>
-            <h1>Page Editor</h1>
-            <p>Bienvenue sur la page Editor.</p>
+            <TextEditor />
         </div>
     );
 };

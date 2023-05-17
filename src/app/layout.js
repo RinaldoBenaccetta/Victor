@@ -4,8 +4,8 @@
 "use client";
 
 import NavBar from "@/components/Navbar/NavBar";
+import { Container } from "@mui/material";
 import { ThemeProvider, useMediaQuery } from "@mui/material";
-// import "./styles/globals.scss";
 import { Inter } from "next/font/google";
 import { lightTheme, darkTheme } from "./theme";
 
@@ -28,7 +28,9 @@ export default function RootLayout({ children }) {
                 <CssBaseline /> {/* reset css */}
                 <body className={inter.className}>
                     <NavBar />
-                    {children}
+                    <Container style={{ marginTop: "56px" }}>
+                        {children}
+                    </Container>
                 </body>
             </html>
         </ThemeProvider>
