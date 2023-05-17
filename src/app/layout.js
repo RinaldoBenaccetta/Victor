@@ -9,7 +9,7 @@ import { ThemeProvider, useMediaQuery } from "@mui/material";
 import { Inter } from "next/font/google";
 import { lightTheme, darkTheme } from "./theme";
 
-// import CssBaseline from "@mui/material/CssBaseline";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
     return (
         <ThemeProvider theme={theme}>
             <html lang="en">
-                {/* <CssBaseline /> */}
+                <CssBaseline /> {/* reset css */}
                 <body className={inter.className}>
                     <NavBar />
                     {children}
