@@ -1,9 +1,8 @@
 import { createTheme } from "@mui/material/styles";
 
-// Créer un thème clair
 const lightTheme = createTheme({
     palette: {
-        mode: "light", // Ici, on définit le mode à 'light'
+        mode: "light",
         primary: {
             main: "#556cd6",
         },
@@ -19,10 +18,9 @@ const lightTheme = createTheme({
     },
 });
 
-// Créer un thème sombre
 const darkTheme = createTheme({
     palette: {
-        mode: "dark", // Ici, on définit le mode à 'dark'
+        mode: "dark",
         primary: {
             main: "#556cd6",
         },

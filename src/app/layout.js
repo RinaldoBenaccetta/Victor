@@ -24,8 +24,8 @@ export default function RootLayout({ children }) {
 
     return (
         <ThemeProvider theme={theme}>
+            <CssBaseline />
             <html lang="en">
-                <CssBaseline /> {/* reset css */}
                 <body className={inter.className}>
                     <NavBar />
                     <Container style={{ marginTop: "56px" }}>
