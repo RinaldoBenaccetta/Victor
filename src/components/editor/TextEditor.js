@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import { Box } from "@mui/material";
+import belAmi from "@/model/demoText/belAmi";
 
 const TextEditor = () => {
     // Initialize Slate editor
@@ -13,7 +14,7 @@ const TextEditor = () => {
     const [value, setValue] = useState([
         {
             type: "paragraph",
-            children: [{ text: "A line of text in a paragraph." }],
+            children: [{ text: belAmi }],
         },
     ]);
 
