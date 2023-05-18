@@ -1,10 +1,12 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { Button } from "@mui/material";
+import { Button, useTheme } from "@mui/material";
+import { RxDotsVertical } from "react-icons/rx";
 
 const ContextButton = ({ isTextSelected, position }) => {
     const buttonRef = useRef();
+    const theme = useTheme();
 
     useEffect(() => {
         if (isTextSelected && position) {
@@ -17,13 +19,15 @@ const ContextButton = ({ isTextSelected, position }) => {
     return (
         <Button
             ref={buttonRef}
+            variant="roundButton"
             style={{
                 position: "absolute",
                 transition: "0.2s",
                 visibility: isTextSelected ? "visible" : "hidden",
             }}
+            aria-label="outils"
         >
-            Click Me
+            <RxDotsVertical />
         </Button>
     );
 };
