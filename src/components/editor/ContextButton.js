@@ -1,35 +1,60 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { Button, useTheme } from "@mui/material";
+import { useRef, useEffect, useState } from "react";
+import { Button } from "@mui/material";
 import { RxDotsVertical } from "react-icons/rx";
+
+import ContextMenu from "./ContextMenu";
 
 const ContextButton = ({ isTextSelected, position }) => {
     const buttonRef = useRef();
-    const theme = useTheme();
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleClick = event => {
+        event.preventDefault();
+
+        setAnchorEl(event.currentTarget);
+    };
+
+    // const handleClose = () => {
+    //     setAnchorEl(null);
+    //     buttonRef.current.style.visibility = "hidden";
+    // };
 
     useEffect(() => {
         if (isTextSelected && position) {
             // Position the button
             buttonRef.current.style.top = `${position.top}px`;
             buttonRef.current.style.left = `${position.left}px`;
+            buttonRef.current.style.visibility = "visible";
+        } else {
+            buttonRef.current.style.visibility = "hidden";
         }
     }, [isTextSelected, position]);
 
     return (
-        <Button
-            ref={buttonRef}
-            variant="contained"
-            style={{
-                position: "absolute",
-                transition: "0.2s",
-                visibility: isTextSelected ? "visible" : "hidden",
-            }}
-            color="grey"
-            aria-label="outils"
-        >
-            <RxDotsVertical />
-        </Button>
+        <>
+            <Button
+                ref={buttonRef}
+                variant="contained"
+                style={{
+                    position: "absolute",
+                    transition: "0.2s",
+                    visibility: isTextSelected ? "visible" : "hidden",
+                }}
+                color="grey"
+                aria-label="outils"
+                onClick={handleClick}
+            >
+                <RxDotsVertical />
+            </Button>
+
+            <ContextMenu
+                anchorEl={anchorEl}
+                setAnchorEl={setAnchorEl}
+                buttonRef={buttonRef}
+            />
+        </>
     );
 };
 
