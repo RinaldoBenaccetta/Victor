@@ -6,7 +6,7 @@ import { RxDotsVertical } from "react-icons/rx";
 
 import ContextMenu from "./ContextMenu";
 
-const ContextButton = ({ isTextSelected, position }) => {
+const ContextButton = ({ isTextSelected, position, selectedText }) => {
     const buttonRef = useRef();
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -15,11 +15,6 @@ const ContextButton = ({ isTextSelected, position }) => {
 
         setAnchorEl(event.currentTarget);
     };
-
-    // const handleClose = () => {
-    //     setAnchorEl(null);
-    //     buttonRef.current.style.visibility = "hidden";
-    // };
 
     useEffect(() => {
         if (isTextSelected && position) {
@@ -39,7 +34,7 @@ const ContextButton = ({ isTextSelected, position }) => {
                 variant="contained"
                 style={{
                     position: "absolute",
-                    transition: "0.2s",
+                    // transition: "0.2s",
                     visibility: isTextSelected ? "visible" : "hidden",
                 }}
                 color="grey"
@@ -53,6 +48,7 @@ const ContextButton = ({ isTextSelected, position }) => {
                 anchorEl={anchorEl}
                 setAnchorEl={setAnchorEl}
                 buttonRef={buttonRef}
+                selectedText={selectedText}
             />
         </>
     );
