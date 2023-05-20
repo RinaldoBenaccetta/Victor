@@ -19,12 +19,13 @@ const ContextButton = ({ isTextSelected, position }) => {
     return (
         <Button
             ref={buttonRef}
-            variant="roundButton"
+            variant="contained"
             style={{
                 position: "absolute",
                 transition: "0.2s",
                 visibility: isTextSelected ? "visible" : "hidden",
             }}
+            color="grey"
             aria-label="outils"
         >
             <RxDotsVertical />
