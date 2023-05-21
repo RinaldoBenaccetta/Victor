@@ -2,7 +2,7 @@
 
 import { Popper, Fade, Paper, MenuItem } from "@mui/material";
 
-const ContextMenu = ({ anchorEl, selectedText }) => {
+const ContextMenu = ({ anchorEl, setAnchorEl, selectedText }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -16,16 +16,28 @@ const ContextMenu = ({ anchorEl, selectedText }) => {
                     <Paper>
                         {[
                             isSingleWord && (
-                                <MenuItem onClick={handleClose} key="synonyme">
+                                <MenuItem
+                                    onClick={handleClose}
+                                    key="synonyme"
+                                    tabIndex={0} // this make menuItem focusable with tab
+                                >
                                     synonyme
                                 </MenuItem>
                             ),
                             isSingleWord && (
-                                <MenuItem onClick={handleClose} key="antonyme">
+                                <MenuItem
+                                    onClick={handleClose}
+                                    key="antonyme"
+                                    tabIndex={0}
+                                >
                                     antonyme
                                 </MenuItem>
                             ),
-                            <MenuItem onClick={handleClose} key="option1">
+                            <MenuItem
+                                onClick={handleClose}
+                                key="option1"
+                                tabIndex={0}
+                            >
                                 Option 1
                             </MenuItem>,
                         ]}

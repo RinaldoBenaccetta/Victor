@@ -77,7 +77,6 @@ const TextEditor = () => {
                     anchorEl={anchorEl}
                     setAnchorEl={setAnchorEl}
                     selectedText={selectedText}
-                    isTextSelected={isTextSelected}
                 />
             </Slate>
         </Box>
