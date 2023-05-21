@@ -34,7 +34,6 @@ const ContextButton = ({ isTextSelected, position, selectedText }) => {
                 variant="contained"
                 style={{
                     position: "absolute",
-                    // transition: "0.2s",
                     visibility: isTextSelected ? "visible" : "hidden",
                 }}
                 color="grey"

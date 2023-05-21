@@ -2,10 +2,10 @@
 
 import { Menu, MenuItem } from "@mui/material";
 
-const ContextMenu = ({ anchorEl, setAnchorEl, buttonRef, selectedText }) => {
+const ContextMenu = ({ anchorEl, setAnchorEl, selectedText }) => {
     const handleClose = () => {
         setAnchorEl(null);
-        buttonRef.current.style.visibility = "hidden";
+        // buttonRef.current.style.visibility = "hidden";
     };
 
     const isSingleWord = selectedText && !selectedText.trim().includes(" ");
