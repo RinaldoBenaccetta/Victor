@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { createEditor, Range, Editor, Text } from "slate";
 import { Slate, Editable, withReact, ReactEditor } from "slate-react";
 import { Box } from "@mui/material";
-import belAmi from "@/model/demoText/belAmi";
+import belAmi from "../../model/demoText/belAmi";
 import ContextMenu from "./ContextMenu";
 
 const CONTEXT_MENU_APPEAR_DELAY = 1000;

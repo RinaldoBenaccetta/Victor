@@ -2,8 +2,7 @@
  * Need to be on client because use of MUI theme here.
  */
 "use client";
-
-import NavBar from "@/components/Navbar/NavBar";
+import NavBar from "../components/Navbar/NavBar";
 import { Container } from "@mui/material";
 import { ThemeProvider, useMediaQuery } from "@mui/material";
 import { Inter } from "next/font/google";
