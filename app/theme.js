@@ -18,6 +18,12 @@ const lightTheme = createTheme({
         grey: {
             main: "#818181",
         },
+        success: {
+            main: "#4caf50",
+        },
+        error: {
+            main: "#f44336",
+        },
     },
     // components: {
     //     MuiButton: {
@@ -53,6 +59,12 @@ const darkTheme = createTheme({
         },
         grey: {
             main: "#818181",
+        },
+        success: {
+            main: "#4caf50",
+        },
+        error: {
+            main: "#f44336",
         },
     },
     // components: {
