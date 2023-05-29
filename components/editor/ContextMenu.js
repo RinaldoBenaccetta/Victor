@@ -2,6 +2,7 @@
 
 import { Popper, Fade, Paper, MenuItem, List } from "@mui/material";
 import { useRef } from "react";
+import { getSynonyms } from "../../app/editor/tools/synonyms";
 
 const ContextMenu = ({ anchorEl, setAnchorEl, selectedText }) => {
     const singleWordFirstRef = useRef(null);
@@ -12,21 +13,6 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText }) => {
     };
 
     const isSingleWord = selectedText && !selectedText.trim().includes(" ");
-
-    const handleSynonyms = async () => {
-        try {
-            const res = await fetch(`/api/get-synonyms/${selectedText}`);
-            // const res = await fetch(`/api/get-synonyms`);
-            if (!res.ok) {
-                throw new Error(res.statusText);
-            }
-            const data = await res.json();
-            console.log(data.synonyms);
-        } catch (error) {
-            console.error("Fetch error:", error);
-        }
-        handleClose();
-    };
 
     return (
         // Popper because Menu is not working well with fake anchorEl
@@ -39,7 +25,10 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText }) => {
                                 isSingleWord && (
                                     <MenuItem
                                         ref={singleWordFirstRef}
-                                        onClick={handleSynonyms}
+                                        onClick={async () => {
+                                            await getSynonyms(selectedText);
+                                            handleClose();
+                                        }}
                                         key="synonyme"
                                         tabIndex={0} // this make menuItem focusable with tab
                                     >
