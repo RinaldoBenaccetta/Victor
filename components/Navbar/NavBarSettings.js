@@ -3,7 +3,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { IconButton, Menu, MenuItem, TextField } from "@mui/material";
+import axios from "axios";
+
+import { Button, IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import { IoIosSettings } from "react-icons/io";
 
 import { mapStateToProps } from "../../app/store/dispatcher";
@@ -11,6 +13,7 @@ import { mapDispatchToProps } from "../../app/store/dispatcher";
 
 const NavBarSettings = ({ userSettings, setApiKey }) => {
     const [anchorEl, setAnchorEl] = useState(null);
+    const [inputApiKey, setInputApiKey] = useState(userSettings.apiKey);
 
     const handleClick = event => {
         setAnchorEl(event.currentTarget);
@@ -20,7 +23,20 @@ const NavBarSettings = ({ userSettings, setApiKey }) => {
         setAnchorEl(null);
     };
 
-    console.log("apikey : ", userSettings.apiKey);
+    const testApiKey = async () => {
+        try {
+            const response = await axios.get(`/api/test-key/${inputApiKey}`);
+
+            if (response.status === 200) {
+                setApiKey(inputApiKey);
+                console.log("valid API key");
+            } else {
+                console.error("Error testing API key");
+            }
+        } catch (error) {
+            console.error("Error testing API key", error);
+        }
+    };
 
     return (
         <div>
@@ -36,11 +52,12 @@ const NavBarSettings = ({ userSettings, setApiKey }) => {
             >
                 <MenuItem>
                     <TextField
-                        value={userSettings.apiKey}
-                        onChange={event => setApiKey(event.target.value)}
+                        value={inputApiKey}
+                        onChange={event => setInputApiKey(event.target.value)}
                         label="Clé API OpenAI"
                         type="password"
                     />
+                    <Button onClick={testApiKey}>Test</Button>
                 </MenuItem>
             </Menu>
         </div>
