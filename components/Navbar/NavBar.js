@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState } from "react";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,6 +14,8 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
+
+import NavBarSettings from "./NavBarSettings";
 
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
@@ -31,7 +33,7 @@ const navItems = [
 
 export default function DrawerAppBar(props) {
     const { window } = props;
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(prevState => !prevState);
@@ -120,6 +122,7 @@ export default function DrawerAppBar(props) {
                     >
                         {menuItems}
                     </List>
+                    <NavBarSettings />
                 </Toolbar>
             </AppBar>
             <Box component="nav">
