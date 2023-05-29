@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { connect } from "react-redux";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -19,6 +20,8 @@ import NavBarSettings from "./NavBarSettings";
 
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
+import { mapStateToProps } from "../../app/store/dispatcher";
+import { mapDispatchToProps } from "../../app/store/dispatcher";
 
 const navItems = [
     {
@@ -31,7 +34,7 @@ const navItems = [
     },
 ];
 
-export default function DrawerAppBar(props) {
+const DrawerAppBar = props => {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -147,4 +150,6 @@ export default function DrawerAppBar(props) {
             </Box>
         </Box>
     );
-}
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerAppBar);

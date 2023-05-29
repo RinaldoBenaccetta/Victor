@@ -9,6 +9,8 @@ import { Inter } from "next/font/google";
 import { lightTheme, darkTheme } from "./theme";
 
 import CssBaseline from "@mui/material/CssBaseline";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,16 +24,18 @@ export default function RootLayout({ children }) {
     const theme = prefersDarkMode ? darkTheme : lightTheme;
 
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <html lang="en">
-                <body className={inter.className}>
-                    <NavBar />
-                    <Container style={{ marginTop: "56px" }}>
-                        {children}
-                    </Container>
-                </body>
-            </html>
-        </ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <html lang="en">
+                    <body className={inter.className}>
+                        <NavBar />
+                        <Container style={{ marginTop: "56px" }}>
+                            {children}
+                        </Container>
+                    </body>
+                </html>
+            </ThemeProvider>
+        </Provider>
     );
 }

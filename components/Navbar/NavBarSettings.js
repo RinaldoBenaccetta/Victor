@@ -1,12 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
+import { connect } from "react-redux";
+
 import { IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import { IoIosSettings } from "react-icons/io";
 
-const NavBarSettings = () => {
+import { mapStateToProps } from "../../app/store/dispatcher";
+import { mapDispatchToProps } from "../../app/store/dispatcher";
+
+const NavBarSettings = ({ userSettings, setApiKey }) => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const [apiKey, setApiKey] = useState("");
 
     const handleClick = event => {
         setAnchorEl(event.currentTarget);
@@ -15,6 +19,8 @@ const NavBarSettings = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    console.log("apikey : ", userSettings.apiKey);
 
     return (
         <div>
@@ -30,7 +36,7 @@ const NavBarSettings = () => {
             >
                 <MenuItem>
                     <TextField
-                        value={apiKey}
+                        value={userSettings.apiKey}
                         onChange={event => setApiKey(event.target.value)}
                         label="Clé API OpenAI"
                         type="password"
@@ -41,4 +47,4 @@ const NavBarSettings = () => {
     );
 };
 
-export default NavBarSettings;
+export default connect(mapStateToProps, mapDispatchToProps)(NavBarSettings);
