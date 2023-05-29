@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 // Use AsyncThunk to let the reducer pure : prevent board effects.
+
+/**
+ * Save the api key on local storage and in the apiKey state.
+ */
 export const setApiKey = createAsyncThunk(
     "userSettings/setApiKey",
     async key => {
@@ -12,7 +16,7 @@ export const setApiKey = createAsyncThunk(
 const userSettingsSlice = createSlice({
     name: "userSettings",
     initialState: {
-        apiKey: "",
+        apiKey: localStorage.getItem("VICTOR_OPENAI_KEY") || "",
     },
     // If reducer is asynchrone or have boards effect,
     // put it in extraReducers, otherwise, put it in reducers
