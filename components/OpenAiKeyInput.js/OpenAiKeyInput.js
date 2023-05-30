@@ -36,6 +36,11 @@ const OpenAiKeyInput = ({ setApiKey, userSettings }) => {
         }
     };
 
+    const handleSubmit = event => {
+        event.preventDefault();
+        testApiKey();
+    };
+
     let buttonIcon;
     switch (apiCheckStatus) {
         case "success":
@@ -63,7 +68,10 @@ const OpenAiKeyInput = ({ setApiKey, userSettings }) => {
     }
 
     return (
-        <>
+        <form
+            onSubmit={handleSubmit}
+            style={{ display: "flex", alignItems: "center" }}
+        >
             <TextField
                 value={inputApiKey}
                 onChange={event => setInputApiKey(event.target.value)}
@@ -73,7 +81,6 @@ const OpenAiKeyInput = ({ setApiKey, userSettings }) => {
                 id="open-ai-key"
             />
             <Button
-                onClick={testApiKey}
                 variant="contained"
                 color={
                     apiCheckStatus === "success"
@@ -85,11 +92,12 @@ const OpenAiKeyInput = ({ setApiKey, userSettings }) => {
                 style={{ textTransform: "capitalize", width: "6rem" }}
                 aria-busy={apiCheckStatus === "loading"}
                 aria-describedby="open-ai-key"
+                type="submit"
             >
                 {buttonIcon}
                 Test
             </Button>
-        </>
+        </form>
     );
 };
 
