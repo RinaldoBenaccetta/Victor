@@ -1,0 +1,11 @@
+/**
+ * To store and fetch on local.
+ */
+
+export const setItem = (key, value) => {
+    localStorage.setItem(key, value);
+};
+
+export const getItem = key => {
+    return localStorage.getItem(key);
+};
