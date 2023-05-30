@@ -18,7 +18,7 @@ export async function GET(request, { params }) {
             model: "text-ada-001",
             prompt: "hello",
             temperature: 1,
-            max_tokens: 5,
+            max_tokens: 1,
             top_p: 1,
             frequency_penalty: 0,
             presence_penalty: 0,
