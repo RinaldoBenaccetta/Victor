@@ -1,8 +1,10 @@
+"use client";
+
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, CircularProgress } from "@mui/material";
 
 import { RxCheck, RxCross2 } from "react-icons/rx";
 
@@ -16,6 +18,7 @@ const OpenAiKeyInput = ({ setApiKey, userSettings }) => {
     const [apiCheckStatus, setApiCheckStatus] = useState("");
 
     const testApiKey = async () => {
+        setApiCheckStatus("loading");
         try {
             const response = await axios.get(`/api/test-key/${inputApiKey}`);
 
@@ -33,6 +36,32 @@ const OpenAiKeyInput = ({ setApiKey, userSettings }) => {
         }
     };
 
+    let buttonIcon;
+    switch (apiCheckStatus) {
+        case "success":
+            buttonIcon = (
+                <RxCheck size={"1.4em"} style={{ marginRight: ".3rem" }} />
+            );
+            break;
+        case "error":
+            buttonIcon = (
+                <RxCross2 size={"1.4em"} style={{ marginRight: ".3rem" }} />
+            );
+            break;
+        case "loading":
+            buttonIcon = (
+                <CircularProgress
+                    size={".8rem"}
+                    color="inherit"
+                    style={{ marginRight: ".3rem" }}
+                />
+            );
+            break;
+        default:
+            buttonIcon = null;
+            break;
+    }
+
     return (
         <>
             <TextField
@@ -40,7 +69,8 @@ const OpenAiKeyInput = ({ setApiKey, userSettings }) => {
                 onChange={event => setInputApiKey(event.target.value)}
                 label="Clé API OpenAI"
                 type="password"
-                style={{ marginRight: ".5rem" }}
+                style={{ marginRight: "1rem" }}
+                id="open-ai-key"
             />
             <Button
                 onClick={testApiKey}
@@ -52,10 +82,11 @@ const OpenAiKeyInput = ({ setApiKey, userSettings }) => {
                         ? "error"
                         : "primary"
                 }
-                style={{ textTransform: "capitalize" }}
+                style={{ textTransform: "capitalize", width: "6rem" }}
+                aria-busy={apiCheckStatus === "loading"}
+                aria-describedby="open-ai-key"
             >
-                {apiCheckStatus === "success" && <RxCheck />}
-                {apiCheckStatus === "error" && <RxCross2 />}
+                {buttonIcon}
                 Test
             </Button>
         </>

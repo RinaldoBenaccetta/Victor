@@ -1,14 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { connect } from "react-redux";
 
 import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import OpenAiKeyInput from "../OpenAiKeyInput.js/OpenAiKeyInput";
 
 import { IoIosSettings } from "react-icons/io";
-import { mapStateToProps } from "../../app/store/dispatcher";
-import { mapDispatchToProps } from "../../app/store/dispatcher";
 
 const NavBarSettings = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -41,4 +38,4 @@ const NavBarSettings = () => {
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBarSettings);
+export default NavBarSettings;
