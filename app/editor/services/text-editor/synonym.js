@@ -5,7 +5,7 @@ export const getSynonyms = async selectedText => {
         const res = await axios.get(`/api/get-synonyms/${selectedText}`);
         const data = res.data;
 
-        console.log(data.synonyms);
+        console.log("synonyms : ", data.synonyms);
     } catch (error) {
         console.error(error);
     }
