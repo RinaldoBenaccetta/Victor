@@ -2,7 +2,7 @@
 
 import { Popper, Fade, Paper, MenuItem, List } from "@mui/material";
 import { useRef } from "react";
-import { getSynonyms } from "../../app/editor/tools/synonyms";
+import { getSynonyms } from "../../app/editor/services/text-editor/synonym";
 
 const ContextMenu = ({ anchorEl, setAnchorEl, selectedText }) => {
     const singleWordFirstRef = useRef(null);
