@@ -1,5 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
-import transformWordsStringToArray from "./helpers/TransformWordsStringToArray";
+import transformWordsStringToArray from "./helpers/transformWordsStringToArray";
 
 const getSynonyms = async word => {
     // todo : get api key from frontend
@@ -12,10 +12,10 @@ const getSynonyms = async word => {
     const response = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: `français synonymes ${word.toUpperCase()} liste mots séparée virgule`,
-        temperature: 0,
+        temperature: 0.05,
         max_tokens: 256,
         top_p: 1,
-        frequency_penalty: 0,
+        frequency_penalty: 1,
         presence_penalty: 0,
     });
 
