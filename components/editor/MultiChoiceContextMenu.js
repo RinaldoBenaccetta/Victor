@@ -12,7 +12,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../app/store/slices/multiChoiceContextMenuSlice";
 
-const MultiChoiceContextMenu = ({}) => {
+const MultiChoiceContextMenu = ({ onItemSelect }) => {
     const dispatch = useDispatch();
     const open = useSelector(state => state.multiChoiceContextMenu.open);
     const loading = useSelector(state => state.multiChoiceContextMenu.loading);
@@ -25,6 +25,7 @@ const MultiChoiceContextMenu = ({}) => {
 
     const handleItemClick = item => {
         console.log(item);
+        onItemSelect(item);
         handleClose();
     };
 

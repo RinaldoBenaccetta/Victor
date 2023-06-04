@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { createEditor, Range, Editor, Text } from "slate";
+import { createEditor, Range, Editor, Text, Transforms } from "slate";
 import { Slate, Editable, withReact, ReactEditor } from "slate-react";
 import { Box } from "@mui/material";
 import belAmi from "../../model/demoText/belAmi";
@@ -65,6 +65,17 @@ const TextEditor = () => {
         }, CONTEXT_MENU_APPEAR_DELAY);
     };
 
+    const handleWordReplacement = itemValue => {
+        const { selection } = editor;
+        if (!selection) return;
+
+        // Delete the currently selected text
+        Editor.deleteFragment(editor);
+
+        // Insert the new text
+        Transforms.insertText(editor, itemValue);
+    };
+
     return (
         <Box>
             <Slate
@@ -84,6 +95,7 @@ const TextEditor = () => {
                     anchorEl={anchorEl}
                     setAnchorEl={setAnchorEl}
                     loading={false}
+                    onItemSelect={handleWordReplacement}
                 />
             </Slate>
         </Box>
