@@ -6,8 +6,10 @@ import getSynonyms from "../../../apiServices/getSynonyms";
 export async function GET(request, { params }) {
     const { word } = params;
 
+    const apiKey = request.headers.get("authorization");
+
     try {
-        const synonyms = await getSynonyms(word);
+        const synonyms = await getSynonyms(word, apiKey);
         return NextResponse.json({ synonyms });
     } catch (error) {
         console.error(error);

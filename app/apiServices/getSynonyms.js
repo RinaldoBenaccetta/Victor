@@ -1,10 +1,9 @@
 import { Configuration, OpenAIApi } from "openai";
 import transformWordsStringToArray from "./helpers/transformWordsStringToArray";
 
-const getSynonyms = async word => {
-    // todo : get api key from frontend
+const getSynonyms = async (word, apiKey) => {
     const configuration = new Configuration({
-        apiKey: "",
+        apiKey: apiKey,
     });
 
     const openai = new OpenAIApi(configuration);

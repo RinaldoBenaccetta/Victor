@@ -1,10 +1,15 @@
 "use client";
 
 import { Popper, Fade, Paper, MenuItem, List } from "@mui/material";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { getSynonyms } from "../../app/editor/services/text-editor/synonym";
+import { connect } from "react-redux";
+import {
+    mapDispatchToProps,
+    mapStateToProps,
+} from "../../app/store/dispatcher";
 
-const ContextMenu = ({ anchorEl, setAnchorEl, selectedText }) => {
+const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
     const singleWordFirstRef = useRef(null);
     const notASingleWordFirstRef = useRef(null);
 
@@ -26,7 +31,10 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText }) => {
                                     <MenuItem
                                         ref={singleWordFirstRef}
                                         onClick={async () => {
-                                            await getSynonyms(selectedText);
+                                            await getSynonyms(
+                                                selectedText,
+                                                userSettings.apiKey
+                                            );
                                             handleClose();
                                         }}
                                         key="synonyme"
@@ -80,4 +88,4 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText }) => {
     );
 };
 
-export default ContextMenu;
+export default connect(mapStateToProps, mapDispatchToProps)(ContextMenu);
