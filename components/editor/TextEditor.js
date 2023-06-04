@@ -80,8 +80,6 @@ const TextEditor = () => {
         Transforms.insertText(editor, newText);
     };
 
-    console.log("helllllo");
-
     return (
         <Box>
             <Slate
