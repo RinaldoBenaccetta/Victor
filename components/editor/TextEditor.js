@@ -7,6 +7,7 @@ import { Box } from "@mui/material";
 import belAmi from "../../model/demoText/belAmi";
 import ContextMenu from "./ContextMenu";
 import MultiChoiceContextMenu from "./MultiChoiceContextMenu";
+import { trimAndAppendSpaces } from "../../app/utils/text/trimAndAppendSpaces";
 
 const CONTEXT_MENU_APPEAR_DELAY = 1000;
 
@@ -69,11 +70,14 @@ const TextEditor = () => {
         const { selection } = editor;
         if (!selection) return;
 
+        const selectedText = Editor.string(editor, selection);
+
         // Delete the currently selected text
         Editor.deleteFragment(editor);
 
         // Insert the new text
-        Transforms.insertText(editor, itemValue);
+        const newText = trimAndAppendSpaces(selectedText, itemValue);
+        Transforms.insertText(editor, newText);
     };
 
     return (
