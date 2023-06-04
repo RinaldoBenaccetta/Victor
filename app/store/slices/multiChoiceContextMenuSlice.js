@@ -4,6 +4,7 @@ const initialState = {
     loading: false,
     open: false,
     items: [],
+    title: "",
 };
 
 const multiChoiceContextMenuSlice = createSlice({
@@ -19,10 +20,13 @@ const multiChoiceContextMenuSlice = createSlice({
         setItems: (state, action) => {
             state.items = action.payload;
         },
+        setTitle: (state, action) => {
+            state.title = action.payload;
+        },
     },
 });
 
-export const { setOpen, setLoading, setItems } =
+export const { setOpen, setLoading, setItems, setTitle } =
     multiChoiceContextMenuSlice.actions;
 
 export default multiChoiceContextMenuSlice.reducer;

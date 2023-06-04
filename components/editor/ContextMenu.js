@@ -12,6 +12,7 @@ import {
     setItems,
     setLoading,
     setOpen,
+    setTitle,
 } from "../../app/store/slices/multiChoiceContextMenuSlice";
 
 const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
@@ -27,6 +28,7 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
     const handleGetSynonyms = async (selectedText, apiKey) => {
         dispatch(setLoading(true));
         dispatch(setOpen(true));
+        dispatch(setTitle(`Synonymes de ${selectedText}`));
 
         const synonyms = await getSynonyms(selectedText, apiKey);
 
