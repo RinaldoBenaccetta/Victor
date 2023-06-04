@@ -4,11 +4,11 @@ import { NextResponse } from "next/server";
 
 import { Configuration, OpenAIApi } from "openai";
 
-export async function GET(request, { params }) {
-    const { key } = params;
+export async function GET(request) {
+    const apiKey = request.headers.get("authorization");
 
     const configuration = new Configuration({
-        apiKey: key,
+        apiKey: apiKey,
     });
 
     const openai = new OpenAIApi(configuration);

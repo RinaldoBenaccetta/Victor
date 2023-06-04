@@ -20,8 +20,11 @@ const OpenAiKeyInput = ({ setApiKey, userSettings }) => {
     const testApiKey = async () => {
         setApiCheckStatus("loading");
         try {
-            // todo : pass key in headers
-            const response = await axios.get(`/api/test-key/${inputApiKey}`);
+            const response = await axios.get(`/api/test-key`, {
+                headers: {
+                    Authorization: inputApiKey,
+                },
+            });
 
             if (response.status === 200) {
                 setApiKey(inputApiKey);
