@@ -80,6 +80,8 @@ const TextEditor = () => {
         Transforms.insertText(editor, newText);
     };
 
+    console.log("helllllo");
+
     return (
         <Box>
             <Slate
@@ -94,13 +96,7 @@ const TextEditor = () => {
                     setAnchorEl={setAnchorEl}
                     selectedText={selectedText}
                 />
-                <MultiChoiceContextMenu
-                    open={true}
-                    anchorEl={anchorEl}
-                    setAnchorEl={setAnchorEl}
-                    loading={false}
-                    onItemSelect={handleWordReplacement}
-                />
+                <MultiChoiceContextMenu onItemSelect={handleWordReplacement} />
             </Slate>
         </Box>
     );
