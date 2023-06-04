@@ -10,7 +10,11 @@ export const getSynonyms = async (selectedText, apiKey) => {
         const data = res.data;
 
         console.log("synonyms : ", data.synonyms);
+
+        return data.synonyms;
     } catch (error) {
         console.error(error);
+
+        return null;
     }
 };

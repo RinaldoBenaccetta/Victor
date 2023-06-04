@@ -6,6 +6,7 @@ import { Slate, Editable, withReact, ReactEditor } from "slate-react";
 import { Box } from "@mui/material";
 import belAmi from "../../model/demoText/belAmi";
 import ContextMenu from "./ContextMenu";
+import MultiChoiceContextMenu from "./MultiChoiceContextMenu";
 
 const CONTEXT_MENU_APPEAR_DELAY = 1000;
 
@@ -77,6 +78,12 @@ const TextEditor = () => {
                     anchorEl={anchorEl}
                     setAnchorEl={setAnchorEl}
                     selectedText={selectedText}
+                />
+                <MultiChoiceContextMenu
+                    open={true}
+                    anchorEl={anchorEl}
+                    setAnchorEl={setAnchorEl}
+                    loading={false}
                 />
             </Slate>
         </Box>

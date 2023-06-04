@@ -3,18 +3,38 @@
 import { Popper, Fade, Paper, MenuItem, List } from "@mui/material";
 import { useRef, useState } from "react";
 import { getSynonyms } from "../../app/editor/services/text-editor/synonym";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import {
     mapDispatchToProps,
     mapStateToProps,
 } from "../../app/store/dispatcher";
+import {
+    setItems,
+    setLoading,
+    setOpen,
+} from "../../app/store/slices/multiChoiceContextMenuSlice";
 
 const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
     const singleWordFirstRef = useRef(null);
     const notASingleWordFirstRef = useRef(null);
 
+    const dispatch = useDispatch();
+
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleGetSynonyms = async (selectedText, apiKey) => {
+        dispatch(setLoading(true));
+        dispatch(setOpen(true));
+
+        const synonyms = await getSynonyms(selectedText, apiKey);
+
+        if (synonyms) {
+            dispatch(setItems(synonyms));
+        }
+
+        dispatch(setLoading(false));
     };
 
     const isSingleWord = selectedText && !selectedText.trim().includes(" ");
@@ -31,7 +51,7 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
                                     <MenuItem
                                         ref={singleWordFirstRef}
                                         onClick={async () => {
-                                            await getSynonyms(
+                                            await handleGetSynonyms(
                                                 selectedText,
                                                 userSettings.apiKey
                                             );
