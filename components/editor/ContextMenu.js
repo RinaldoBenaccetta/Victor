@@ -14,6 +14,7 @@ import {
     setOpen,
     setTitle,
 } from "../../app/store/slices/multiChoiceContextMenuSlice";
+import getAntonyms from "../../app/apiServices/getAntonyms";
 
 const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
     const singleWordFirstRef = useRef(null);
@@ -34,6 +35,20 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
 
         if (synonyms) {
             dispatch(setItems(synonyms));
+        }
+
+        dispatch(setLoading(false));
+    };
+
+    const handleGetAntonyms = async (selectedText, apiKey) => {
+        dispatch(setLoading(true));
+        dispatch(setOpen(true));
+        dispatch(setTitle(`Antonymes de ${selectedText}`));
+
+        const antonymes = await getAntonyms(selectedText, apiKey);
+
+        if (antonymes) {
+            dispatch(setItems(antonymes));
         }
 
         dispatch(setLoading(false));
@@ -62,16 +77,22 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
                                         key="synonyme"
                                         tabIndex={0} // this make menuItem focusable with tab
                                     >
-                                        synonyme
+                                        Synonyme
                                     </MenuItem>
                                 ),
                                 isSingleWord && (
                                     <MenuItem
-                                        onClick={handleClose}
+                                        onClick={async () => {
+                                            await handleGetAntonyms(
+                                                selectedText,
+                                                userSettings.apiKey
+                                            );
+                                            handleClose();
+                                        }}
                                         key="antonyme"
                                         tabIndex={0}
                                     >
-                                        antonyme
+                                        Antonyme
                                     </MenuItem>
                                 ),
                                 <MenuItem

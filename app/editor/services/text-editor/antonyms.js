@@ -1,15 +1,15 @@
 import axios from "axios";
 
-export const getSynonyms = async (selectedText, apiKey) => {
+export const getAntonyms = async (selectedText, apiKey) => {
     try {
-        const res = await axios.get(`/api/get-synonyms/${selectedText}`, {
+        const res = await axios.get(`/api/get-antonyms/${selectedText}`, {
             headers: {
                 Authorization: apiKey,
             },
         });
         const data = res.data;
 
-        return data.synonyms;
+        return data.antonyms;
     } catch (error) {
         console.error(error);
 
