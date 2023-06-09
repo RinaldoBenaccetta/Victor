@@ -14,6 +14,7 @@ import {
     setOpen,
     setTitle,
 } from "../../app/store/slices/multiChoiceContextMenuSlice";
+import { openInfoModal } from "../../app/store/slices/infoModalSlice";
 import getAntonyms from "../../app/apiServices/getAntonyms";
 
 const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
@@ -26,7 +27,18 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
         setAnchorEl(null);
     };
 
+    const showModalNeedApiKey = () => {
+        dispatch(
+            openInfoModal("Vous devez entrer un clé API de OpenAi valide")
+        );
+    };
+
     const handleGetSynonyms = async (selectedText, apiKey) => {
+        if (!apiKey) {
+            showModalNeedApiKey();
+            return;
+        }
+
         dispatch(setLoading(true));
         dispatch(setOpen(true));
         dispatch(setTitle(`Synonymes de ${selectedText}`));
@@ -41,6 +53,11 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
     };
 
     const handleGetAntonyms = async (selectedText, apiKey) => {
+        if (!apiKey) {
+            showModalNeedApiKey();
+            return;
+        }
+
         dispatch(setLoading(true));
         dispatch(setOpen(true));
         dispatch(setTitle(`Antonymes de ${selectedText}`));

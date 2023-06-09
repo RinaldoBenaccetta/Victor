@@ -11,6 +11,7 @@ import { lightTheme, darkTheme } from "./theme";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import InfoModal from "../components/InfoModal/infoModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
                 <CssBaseline />
                 <html lang="en">
                     <body className={inter.className}>
+                        <InfoModal />
                         <NavBar />
                         <Container style={{ marginTop: "56px" }}>
                             {children}
