@@ -21,10 +21,9 @@ const TextEditor = () => {
         },
     ]);
 
-    const [isTextSelected, setTextSelected] = useState(false);
-
+    // const [isTextSelected, setTextSelected] = useState(false);
     const [selectedText, setSelectedText] = useState("");
-
+    const [extendedSelectedText, setExtendedSelectedText] = useState("");
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleSelect = () => {
@@ -36,10 +35,10 @@ const TextEditor = () => {
                 Range.isCollapsed(selection) ||
                 !ReactEditor.isFocused(editor)
             ) {
-                setTextSelected(false);
+                // setTextSelected(false);
                 setAnchorEl(null);
             } else {
-                setTextSelected(true);
+                // setTextSelected(true);
                 const domSelection = window.getSelection();
                 const range = domSelection.getRangeAt(0);
                 const rect = range.getBoundingClientRect();
@@ -62,9 +61,28 @@ const TextEditor = () => {
                 const selectedText = window.getSelection().toString();
 
                 setSelectedText(selectedText);
+
+                const beforePoint = Editor.before(editor, selection, {
+                    unit: "word",
+                });
+                const afterPoint = Editor.after(editor, selection, {
+                    unit: "word",
+                });
+
+                if (beforePoint && afterPoint) {
+                    const extendedRange = {
+                        anchor: beforePoint,
+                        focus: afterPoint,
+                    };
+                    const extendedText = Editor.string(editor, extendedRange);
+
+                    setExtendedSelectedText(extendedText);
+                }
             }
         }, CONTEXT_MENU_APPEAR_DELAY);
     };
+
+    console.log("extendedSelectedText : ", extendedSelectedText);
 
     const handleWordReplacement = itemValue => {
         const { selection } = editor;
