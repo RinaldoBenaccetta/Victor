@@ -17,7 +17,13 @@ import {
 import { openInfoModal } from "../../app/store/slices/infoModalSlice";
 import getAntonyms from "../../app/apiServices/getAntonyms";
 
-const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
+const ContextMenu = ({
+    anchorEl,
+    setAnchorEl,
+    selectedText,
+    extendedSelectedText,
+    userSettings,
+}) => {
     const singleWordFirstRef = useRef(null);
     const notASingleWordFirstRef = useRef(null);
 
@@ -33,8 +39,8 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
         );
     };
 
-    const handleGetSynonyms = async (selectedText, apiKey) => {
-        if (!apiKey) {
+    const handleGetSynonyms = async () => {
+        if (!userSettings.apiKey) {
             showModalNeedApiKey();
             return;
         }
@@ -43,7 +49,11 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
         dispatch(setOpen(true));
         dispatch(setTitle(`Synonymes de ${selectedText}`));
 
-        const synonyms = await getSynonyms(selectedText, apiKey);
+        const synonyms = await getSynonyms(
+            selectedText,
+            extendedSelectedText,
+            userSettings.apiKey
+        );
 
         if (synonyms) {
             dispatch(setItems(synonyms));
@@ -52,7 +62,11 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
         dispatch(setLoading(false));
     };
 
-    const handleGetAntonyms = async (selectedText, apiKey) => {
+    const handleGetAntonyms = async (
+        selectedText,
+        extendedSelectedText,
+        apiKey
+    ) => {
         if (!apiKey) {
             showModalNeedApiKey();
             return;
@@ -62,7 +76,11 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
         dispatch(setOpen(true));
         dispatch(setTitle(`Antonymes de ${selectedText}`));
 
-        const antonymes = await getAntonyms(selectedText, apiKey);
+        const antonymes = await getAntonyms(
+            selectedText,
+            apiKey,
+            extendedSelectedText
+        );
 
         if (antonymes) {
             dispatch(setItems(antonymes));
@@ -85,10 +103,7 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
                                     <MenuItem
                                         ref={singleWordFirstRef}
                                         onClick={async () => {
-                                            await handleGetSynonyms(
-                                                selectedText,
-                                                userSettings.apiKey
-                                            );
+                                            await handleGetSynonyms();
                                             handleClose();
                                         }}
                                         key="synonyme"
@@ -102,6 +117,7 @@ const ContextMenu = ({ anchorEl, setAnchorEl, selectedText, userSettings }) => {
                                         onClick={async () => {
                                             await handleGetAntonyms(
                                                 selectedText,
+                                                extendedSelectedText,
                                                 userSettings.apiKey
                                             );
                                             handleClose();

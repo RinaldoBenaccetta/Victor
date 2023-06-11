@@ -82,7 +82,7 @@ const TextEditor = () => {
         }, CONTEXT_MENU_APPEAR_DELAY);
     };
 
-    console.log("extendedSelectedText : ", extendedSelectedText);
+    // console.log("extendedSelectedText : ", extendedSelectedText);
 
     const handleWordReplacement = itemValue => {
         const { selection } = editor;
@@ -111,6 +111,7 @@ const TextEditor = () => {
                     anchorEl={anchorEl}
                     setAnchorEl={setAnchorEl}
                     selectedText={selectedText}
+                    extendedSelectedText={extendedSelectedText}
                 />
                 <MultiChoiceContextMenu onItemSelect={handleWordReplacement} />
             </Slate>

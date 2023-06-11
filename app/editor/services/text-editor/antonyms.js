@@ -1,12 +1,19 @@
 import axios from "axios";
 
-export const getAntonyms = async (selectedText, apiKey) => {
+export const getAntonyms = async (
+    selectedText,
+    apiKey,
+    extendedSelectedText
+) => {
     try {
-        const res = await axios.get(`/api/get-antonyms/${selectedText}`, {
-            headers: {
-                Authorization: apiKey,
-            },
-        });
+        const res = await axios.get(
+            `/api/get-antonyms/${selectedText}/${extendedSelectedText}`,
+            {
+                headers: {
+                    Authorization: apiKey,
+                },
+            }
+        );
         const data = res.data;
 
         return data.antonyms;

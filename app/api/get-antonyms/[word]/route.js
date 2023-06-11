@@ -4,12 +4,12 @@ import { NextResponse } from "next/server";
 import getAntonyms from "../../../apiServices/getAntonyms";
 
 export async function GET(request, { params }) {
-    const { word } = params;
+    const { word, text } = params;
 
     const apiKey = request.headers.get("authorization");
 
     try {
-        const antonyms = await getAntonyms(word, apiKey);
+        const antonyms = await getAntonyms(word, text, apiKey);
         return NextResponse.json({ antonyms });
     } catch (error) {
         console.error(error);

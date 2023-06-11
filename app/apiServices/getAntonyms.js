@@ -1,7 +1,7 @@
 import { Configuration, OpenAIApi } from "openai";
 import transformWordsStringToArray from "./helpers/transformWordsStringToArray";
 
-const getAntonyms = async (word, apiKey) => {
+const getAntonyms = async (word, text, apiKey) => {
     const configuration = new Configuration({
         apiKey: apiKey,
     });
