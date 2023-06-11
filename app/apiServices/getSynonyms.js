@@ -31,7 +31,7 @@ const getSynonyms = async (word, text, apiKey) => {
                 content: `exemple:
               mot:arrêta texte:il s'arrêta à
               réponse:
-              il stoppa à nouveau§il s’interrompit à nouveau§il s'immobilisa à nouveau§il se figea à nouveau§
+              il stoppa à§il s’interrompit à§il s'immobilisa à§il se figea à§
 
               exemple:
               mot:prairie texte:la prairie verte

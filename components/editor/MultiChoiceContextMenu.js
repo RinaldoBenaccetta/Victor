@@ -24,7 +24,6 @@ const MultiChoiceContextMenu = ({ onItemSelect }) => {
     };
 
     const handleItemClick = item => {
-        console.log(item);
         onItemSelect(item);
         handleClose();
     };

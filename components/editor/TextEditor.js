@@ -100,8 +100,6 @@ const TextEditor = () => {
         const { selection } = editor;
         if (!selection) return;
 
-        console.log("item value _", "_" + itemValue);
-
         const beforePoint = Editor.before(editor, selection, { unit: "word" });
         const afterPoint = Editor.after(editor, selection, { unit: "word" });
 
