@@ -82,9 +82,7 @@ const TextEditor = () => {
         }, CONTEXT_MENU_APPEAR_DELAY);
     };
 
-    // console.log("extendedSelectedText : ", extendedSelectedText);
-
-    const handleWordReplacement = itemValue => {
+    const handleSelectionReplacement = itemValue => {
         const { selection } = editor;
         if (!selection) return;
 
@@ -96,6 +94,30 @@ const TextEditor = () => {
         // Insert the new text
         const newText = trimAndAppendSpaces(selectedText, itemValue);
         Transforms.insertText(editor, newText);
+    };
+
+    const handleExtendedSelectionReplacement = itemValue => {
+        const { selection } = editor;
+        if (!selection) return;
+
+        console.log("item value _", "_" + itemValue);
+
+        const beforePoint = Editor.before(editor, selection, { unit: "word" });
+        const afterPoint = Editor.after(editor, selection, { unit: "word" });
+
+        if (beforePoint && afterPoint) {
+            const extendedRange = { anchor: beforePoint, focus: afterPoint };
+
+            // Delete the extended text
+            Transforms.delete(editor, { at: extendedRange });
+
+            const newText = itemValue.trim();
+
+            // Insert the new text
+            Transforms.insertText(editor, newText, {
+                at: extendedRange.anchor,
+            });
+        }
     };
 
     return (
@@ -113,7 +135,9 @@ const TextEditor = () => {
                     selectedText={selectedText}
                     extendedSelectedText={extendedSelectedText}
                 />
-                <MultiChoiceContextMenu onItemSelect={handleWordReplacement} />
+                <MultiChoiceContextMenu
+                    onItemSelect={handleExtendedSelectionReplacement}
+                />
             </Slate>
         </Box>
     );
