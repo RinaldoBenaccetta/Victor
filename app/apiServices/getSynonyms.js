@@ -36,15 +36,20 @@ const getSynonyms = async (word, text, apiKey) => {
               exemple:
               mot:prairie texte:la prairie verte
               réponse:
-              le champ vert§le pré vert§le gazon vert§le pâturage vert§la pelouse verte§`,
+              le champ vert§le pré vert§le gazon vert§le pâturage vert§la pelouse verte§
+              
+              exemple:
+              mot:exhalaient texte:égouts exhalaient des
+              réponse:
+              égouts émanaient des§égouts diffusaient des§égouts dégageaient des§égouts libéraient des§égouts émettaient des§égouts propageaient des§égouts soufflaient des§`,
             },
             { role: "user", content: `test : mot:${word} texte:${text}` },
         ],
         temperature: 1,
         max_tokens: 256,
-        // top_p: 1,
+        top_p: 1,
         frequency_penalty: 0.5,
-        // presence_penalty: 0.5,
+        presence_penalty: 0.5,
     });
 
     // todo : log prompt and responses
